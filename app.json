@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gnova10.himymApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,6 +30,14 @@
     "scheme": "exponavigation",
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "041247cf-7722-4bb7-896e-d281084ecf9f"
+      }
+    }
   }
 }
