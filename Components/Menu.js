@@ -5,14 +5,14 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 
 /* 
-1: Sum
-2: Traduc
+1: Work
+2: Info
 3: Home
-4: Tabla
-5: Exp
+4: People
+5: Film
  */
 
-export const Menu = ({ handleView }) => {
+export const Menu = ({ handleView, view }) => {
 
     return (
         <View style={styles.container}>
@@ -21,8 +21,7 @@ export const Menu = ({ handleView }) => {
                 title="Informacion"
                 onPress={() => handleView(1)}
             >
-
-                <MaterialIcons name='work' style={styles.Icon} />
+                <MaterialIcons name='work' style={view === 1 ? styles.IconSelected:styles.Icon} />
                 <Text style={styles.IconText}>Work</Text>
 
             </TouchableOpacity>
@@ -32,7 +31,7 @@ export const Menu = ({ handleView }) => {
                 title="Traduc"
                 onPress={() => handleView(2)}
             >
-                <Icon name='info' style={styles.Icon} />
+                <Icon name='info' style={view === 2 ? styles.IconSelected:styles.Icon} />
                 <Text style={styles.IconText}>Info</Text>
 
             </TouchableOpacity>
@@ -42,7 +41,7 @@ export const Menu = ({ handleView }) => {
                 title="Portada"
                 onPress={() => handleView(3)}
             >
-                <Icon name='home' style={styles.IconSelected} />
+                <Icon name='home' style={view === 3 ? styles.IconSelected:styles.Icon} />
                 <Text style={styles.IconText}>Home</Text>
 
             </TouchableOpacity>
@@ -52,7 +51,7 @@ export const Menu = ({ handleView }) => {
                 title="Personajes"
                 onPress={() => handleView(4)}
             >
-                <MaterialIcons name='people-outline' style={styles.Icon} />
+                <MaterialIcons name='people-outline' style={view === 4 ? styles.IconSelected:styles.Icon} />
                 <Text style={styles.IconText}>People</Text>
             </TouchableOpacity>
 
@@ -61,7 +60,7 @@ export const Menu = ({ handleView }) => {
                 title="Exp"
                 onPress={() => handleView(5)}
             >
-                <Fontisto name='film' style={styles.Icon} />
+                <Fontisto name='film' style={view === 5 ? styles.IconSelected:styles.Icon} />
                 <Text style={styles.IconText}>Film</Text>
             </TouchableOpacity>
         </View>

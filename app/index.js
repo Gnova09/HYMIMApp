@@ -2,6 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Menu } from '../Components/Menu';
+import {Home} from "../View/Home"
+import { People } from '../View/People';
+import { Info } from '../View/Info';
+import { Work } from '../View/Work';
+import { Film } from '../View/Film';
 
 export default function App() {
 
@@ -11,10 +16,32 @@ export default function App() {
   const handleViewSelected = (view) => {
     setViewSelected(view)
   }
+
+  const RenderizarComponente = () => {
+    switch (viewSelected) {
+      case 1:
+        return <Work />
+
+      case 2:
+        return <Info />;
+
+      case 3:
+        return <Home />
+
+      case 4:
+        return <People />;
+
+      case 5:
+        return <Film />;
+
+    }
+  }
+
+
   return (
     <View style={styles.container}>
-      
 
+      <RenderizarComponente />
       <Menu handleView={handleViewSelected} view={viewSelected} />
     </View>
   );
