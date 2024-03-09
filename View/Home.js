@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Button, Text, View, StyleSheet, Alert, TouchableOpacity } from 'react-native'
+import { Button, Text, Image, View, StyleSheet, Alert, TouchableOpacity } from 'react-native'
 import { Video, ResizeMode } from 'expo-av';
 
 
@@ -22,19 +22,12 @@ export const Home = () => {
     return (
         <View style={styles.container}>
             
-            <Text style={styles.twelve}>How i Met your Mother</Text>
+            <Text style={styles.twelve}>Your APP</Text>
             
-             <Video
-                ref={video}
-                style={styles.video}
-                source={{uri: 'https://imdb-video.media-imdb.com/vi929409305/1434659607842-pgv4ql-1616202489045.mp4?Expires=1709265589&Signature=lDTl-t64GzR-HdclGzm8H7vLYnetyY3pcqeURdhqyLFADCU3FnXjIufo0Mq6L82duJ-PRX~nfogW9iuvo73gis8EJXTBCfyBLOcUVbHwpqZ5WVdSTx2VbJuYzJSMvXvSwcMdSG7JfYdaZBec9fZuRD4tWS1h7DWyXgGdYIaiW5run7gUfA60uWcdGxrzSj48tGz9A3nOpJRBSeM3G8wtD2HHgYh7buHcRioNJ7iJcVmXpm4ZRAg5nzu9kKOW~atZuPVqEqlRDCvpMsbnAasX5qzMaku3e0aVST9MLf5lot-6GpInesfzWfTFwM-6fDa3aGd3bRs0jnD3ZrA~eMxoRQ__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA'}}
-                useNativeControls
-                resizeMode={ResizeMode.CONTAIN}
-                isLooping={false}
-                shouldPlay={true}
-                volume={0.8}
-                onPlaybackStatusUpdate={status => setStatus(() => status)}
-            /> 
+             <Image 
+             source={require("../assets/Herramienta.jpg")} 
+             style={styles.personaje}
+             />
         </View>
     )
 }
@@ -60,5 +53,10 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
         fontFamily:"serif",
         fontStyle: "italic"
+    },
+    personaje: {
+        borderRadius: 10,
+        width: 200,
+        height: 200,
     },
 })

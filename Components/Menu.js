@@ -52,7 +52,7 @@ export const Menu = ({ handleView, view }) => {
                 onPress={() => handleView(4)}
             >
                 <MaterialIcons name='people-outline' style={view === 4 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>People</Text>
+                <Text style={styles.IconText}>GENDER</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
