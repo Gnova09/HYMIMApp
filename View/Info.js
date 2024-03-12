@@ -1,48 +1,63 @@
 import React, { useState, useRef } from 'react'
-import { Button, Text, View, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native'
-import { Video, ResizeMode } from 'expo-av';
+import { Button, Text, View, StyleSheet, Alert, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
 
 
 /* 
 1: Work
 2: Info
 3: Home
-4: People
+4: Gender
 5: Film
  */
 
-
-
+const Separetor = () => <View style={styles.separator} />
 export const Info = () => {
     /* const videoRef = useRef<VideoRef>(null);*/
-
-    const video = useRef(null);
-    const [personajeSelected, setPersonajeSelected] = useState({
-        name: "",
-        img: "",
-        descripcion: ""
-    },);
-
-
-
+    const [name, setName] = useState("")
+    const [data, setData] = useState([])
+    const onButtonPress = async () => {
+        const url = `http://universities.hipolabs.com/search?country=${name}`
+        try {
+            const response = await fetch(url);
+            const jsonData = await response.json();
+            console.log(jsonData)
+            setData(jsonData);
+        } catch (error) {
+            console.error('Error al recuperar datos:', error);
+        }
+    }
     return (
         <View style={styles.container}>
-            <Text style={styles.twelve}>¡Bienvenidos a Cómo conocí a vuestra madre!</Text>
-            <Image
-                source={require('../assets/peronajes.png')}
-                style={styles.personaje}
-            />
+            <Text style={styles.twelve}>Buscador de universidad</Text>
             <View style={styles.personajeContainer}>
-                
-                <Text><Text style={{fontWeight: "bold"}}>Creado por:</Text> Carter Bays y Craig Thomas</Text>
-                <Text><Text style={{fontWeight: "bold"}}>Dirigido por:</Text> Pamela Fryman, Rob Greenberg</Text>
-                <Text><Text style={{fontWeight: "bold"}}>Protagonisado por:</Text> Josh Radnor, Jason Segel, Cobie Smulders, Neil Patrick Harris, Alyson Hannigan, Cristin Milioti</Text>
-                <Text><Text style={{fontWeight: "bold"}}>No. Temporadas:</Text> 9</Text>
-                <Text><Text style={{fontWeight: "bold"}}>No. Episodios:</Text> 208</Text>
-                <Text><Text style={{fontWeight: "bold"}}>Tema Principal:</Text> "Hey Beautiful" por The Solids</Text>
-                
+                <TextInput
+                    placeholder='Indique su Pais'
+                    style={styles.input}
+                    onChangeText={(value) => setName(value)}
+                />
             </View>
+            <Separetor />
+            <Button
+                title='Validar'
+                onPress={() => onButtonPress()}
+            />
+            <View style={{height: "80%"}}>
+                <ScrollView style={styles.scroll}>
 
+                    {
+                        data.map((uni, i) => {
+
+                            return (
+                                <TouchableOpacity style={styles.uni} key={i}>
+                                    <Text > Nombre: {uni.name} </Text>
+                                    <Text > web: {uni.web_pages[0]} </Text>
+                                    <Text > Dominio: {uni.domains} </Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                </ScrollView>
+            </View>
         </View>
     )
 }
@@ -54,28 +69,38 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    scroll:{
+        gap: 5
+    },
+    input: {
+        borderWidth: 1,
+        paddingHorizontal: 5,
+        width: "100%"
+    },
     twelve: {
-        fontSize: 18,
-        textTransform: "uppercase",
-        width: "100%",
-        textAlign: "center",
         marginBottom: 10,
+        fontSize: 22,
+        textTransform: "uppercase",
+        width: "75%",
+        textAlign: "justify",
+        margin: "auto",
         letterSpacing: 1,
         fontFamily: "serif",
         fontStyle: "italic"
     },
     personajeContainer: {
         width: "90%",
-        marginTop: 10,
-        justifyContent: "flex-start",
-        textAlign: "left",
-        gap: 5,
-        
+        height: "auto",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10,
+        flexDirection: "row",
+        flexWrap: "wrap"
     },
     personaje: {
         borderRadius: 10,
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
     },
     textDesc: {
         width: "100%",
@@ -86,6 +111,18 @@ const styles = StyleSheet.create({
         fontSize: 18,
         paddingTop: 10,
         fontWeight: "bold",
+
+    }, separator: {
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    uni: {
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        borderWidth: 1,
+        marginBottom:2
 
     }
 })

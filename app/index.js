@@ -17,6 +17,14 @@ export default function App() {
     setViewSelected(view)
   }
 
+  /* 
+1: Work
+2: Info
+3: Home
+4: Gender
+5: Film
+ */
+  
   const RenderizarComponente = () => {
     switch (viewSelected) {
       case 1:

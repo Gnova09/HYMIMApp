@@ -1,76 +1,53 @@
 import React, { useState, useRef } from 'react'
-import { Button, Text, View, StyleSheet, Alert, TouchableOpacity, Image, Linking } from 'react-native'
-import { Video, ResizeMode } from 'expo-av';
+import { Button, Text, View, StyleSheet, Alert, TouchableOpacity, Image, TextInput } from 'react-native'
 
 
 /* 
 1: Work
 2: Info
 3: Home
-4: People
+4: Gender
 5: Film
  */
 
-
-const momentos = [
-    {
-        name: "Juntos para siempre",
-        img: require("../assets/momentos/Juntos.png"),
-        video: "https://www.youtube.com/embed/ies5TUZTa9U?si=SOvTHtsP9mSjP78n",
-        descripcion: "Barnabus 'Barney' Stinson (1976), interpretado por Neil Patrick Harris, es un ex-mujeriego, partidario de los trajes y mago al que le gusta jugar al laser tag y usar las palabras sublime y legendario, palabras que Ted dice que usa con un sentido demasiado liberal."
-    },
-    {
-        name: "La limusina",
-        img: require("../assets/momentos/limusina.png"),
-        video: "https://youtu.be/HunB2WNIEQ8",
-        descripcion: "Barnabus 'Barney' Stinson (1976), interpretado por Neil Patrick Harris, es un ex-mujeriego, partidario de los trajes y mago al que le gusta jugar al laser tag y usar las palabras sublime y legendario, palabras que Ted dice que usa con un sentido demasiado liberal."
-    },
-    {
-        name: "Diez sesiones",
-        img: require("../assets/momentos/Diezsesiones.png"),
-        video: "https://youtu.be/4iXyhrey8qA",
-        descripcion: "A pesar de lo mal que terminó, la relación entre Stella y Ted nos dejó grandes momentos. Sin duda uno de los clips más románticos de la serie es la cita exprés que Ted logra organizar para una Stella desbordada por el trabajo. Dos minutos son más que suficiente para demostrar un gran gesto."
-    },
-
-]
+const Separetor = () => <View style={styles.separator} />
 
 export const Film = () => {
+
     /* const videoRef = useRef<VideoRef>(null);*/
-
-    const video = useRef(null);
-    const [status, setStatus] = React.useState({});
-    const [momentoSelected, setmomentoSelected] = useState({
-        name: "",
-        img: "",
-        video:"youtube.com",
-        descripcion: ""
-    },);
-
-
-
+    const [name, setName] = useState("")
+    const [data, setData] = useState("")
+    const onButtonPress = async () => {
+        const url = `https://api.agify.io/?name=${name}`
+        try {
+            const response = await fetch(url);
+            const jsonData = await response.json();
+            setData(jsonData);
+        } catch (error) {
+            console.error('Error al recuperar datos:', error);
+        }
+    }
     return (
         <View style={styles.container}>
-            <Text style={styles.twelve}>Personajes</Text>
+            <Text style={styles.twelve}>Revelador Edad</Text>
             <View style={styles.personajeContainer}>
-                {
-                    momentos.map((momento,i) => {
-                        return (
-                            <TouchableOpacity onPress={()=>setmomentoSelected(momento)} key={i}>
-                                <Image
-                                    source={momento.img}
-                                    style={styles.personaje}
-                                />      
-                            </TouchableOpacity>
-                        )
-                    })
-                } 
+                <TextInput
+                    placeholder='Indique su nombre'
+                    style={styles.input}
+                    onChangeText={(value) => setName(value)}
+                />
             </View>
-
-            <Text style={styles.text}> {momentoSelected.name}</Text>
-            <TouchableOpacity onPress={()=>Linking.openURL(momentoSelected.video)} >
-            <Text style={styles.textDesc}> Parar ver video en youtube Click Aqui </Text>
-            </TouchableOpacity>
-
+            <Separetor />
+            <Button
+                title='Validar'
+                onPress={()=>onButtonPress()}
+            />
+            <View 
+            style={styles.personajeContainer}
+            >
+            <Text style={styles.textDesc}> Descripcion:</Text>
+            <Text><Text style={{fontWeight: "bold"}}>Edad:</Text> {data.age}</Text>
+            </View>
         </View>
     )
 }
@@ -82,10 +59,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    input: {
+        borderWidth: 1,
+        paddingHorizontal: 5,
+        width: "100%"
+    },
     twelve: {
-        fontSize: 26,
+        marginBottom: 10,
+        fontSize: 22,
         textTransform: "uppercase",
-        width: 200,
+        width: "75%",
         textAlign: "justify",
         margin: "auto",
         letterSpacing: 1,
@@ -115,5 +98,9 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         fontWeight: "bold",
 
-    }
+    }, separator: {
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
 })

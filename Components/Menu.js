@@ -5,7 +5,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 
 /* 
-1: Work
+1: Age
 2: Info
 3: Home
 4: People
@@ -32,7 +32,7 @@ export const Menu = ({ handleView, view }) => {
                 onPress={() => handleView(2)}
             >
                 <Icon name='info' style={view === 2 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>Info</Text>
+                <Text style={styles.IconText}>Search</Text>
 
             </TouchableOpacity>
 
@@ -61,7 +61,7 @@ export const Menu = ({ handleView, view }) => {
                 onPress={() => handleView(5)}
             >
                 <Fontisto name='film' style={view === 5 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>Film</Text>
+                <Text style={styles.IconText}>AGE</Text>
             </TouchableOpacity>
         </View>
     )
