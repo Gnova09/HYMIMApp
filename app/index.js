@@ -9,7 +9,7 @@ import { Historial } from '../View/Historial';
 
 export default function App() {
 
-  const [viewSelected, setViewSelected] = useState(3)
+  const [viewSelected, setViewSelected] = useState(0)
 
 
   const handleViewSelected = (view) => {

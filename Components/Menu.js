@@ -20,32 +20,33 @@ export const Menu = ({ handleView, view }) => {
         {
             title: "New",
             onPress: 1,
-            icon:'new-label' 
+            icon: 'new-label'
         },
         {
             title: "Home",
             onPress: 0,
-            icon:'home' 
+            icon: 'home'
         },
         {
             title: "Historial",
             onPress: 2,
-            icon:'book' 
+            icon: 'book'
         },
     ]
 
     return (
         <View style={styles.container}>
             {
-                vistas.map(({title,onPress, icon}) => {
+                vistas.map(({ title, onPress, icon }, key) => {
                     return (
 
                         <TouchableOpacity
+                            key={key}
                             style={styles.MenuBTN}
                             title={title}
                             onPress={() => handleView(onPress)}
                         >
-                            <MaterialIcons name={icon} style={view === onPress ? styles.IconSelected:styles.Icon} />
+                            <MaterialIcons name={icon} style={view === onPress ? styles.IconSelected : styles.Icon} />
                             <Text style={styles.IconText}>{title}</Text>
 
                         </TouchableOpacity>
