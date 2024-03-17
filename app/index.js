@@ -3,10 +3,9 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Menu } from '../Components/Menu';
 import {Home} from "../View/Home"
-import { People } from '../View/People';
-import { Info } from '../View/Info';
-import { Work } from '../View/Work';
-import { Film } from '../View/Film';
+import {NewEvent} from "../View/NewEvent"
+import { Historial } from '../View/Historial';
+
 
 export default function App() {
 
@@ -19,20 +18,16 @@ export default function App() {
 
   const RenderizarComponente = () => {
     switch (viewSelected) {
-      case 1:
-        return <Work />
-
-      case 2:
-        return <Info />;
-
-      case 3:
+      
+      case 0:
         return <Home />
+      
+        case 1:
+        return <NewEvent />
+      
+        case 2:
+        return <Historial />
 
-      case 4:
-        return <People />;
-
-      case 5:
-        return <Film />;
 
     }
   }

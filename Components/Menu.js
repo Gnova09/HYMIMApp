@@ -12,57 +12,46 @@ import Fontisto from 'react-native-vector-icons/Fontisto'
 5: Film
  */
 
+
+
 export const Menu = ({ handleView, view }) => {
+
+    const vistas = [
+        {
+            title: "New",
+            onPress: 1,
+            icon:'new-label' 
+        },
+        {
+            title: "Home",
+            onPress: 0,
+            icon:'home' 
+        },
+        {
+            title: "Historial",
+            onPress: 2,
+            icon:'book' 
+        },
+    ]
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={styles.MenuBTN}
-                title="Informacion"
-                onPress={() => handleView(1)}
-            >
-                <MaterialIcons name='work' style={view === 1 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>Work</Text>
+            {
+                vistas.map(({title,onPress, icon}) => {
+                    return (
 
-            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.MenuBTN}
+                            title={title}
+                            onPress={() => handleView(onPress)}
+                        >
+                            <MaterialIcons name={icon} style={view === onPress ? styles.IconSelected:styles.Icon} />
+                            <Text style={styles.IconText}>{title}</Text>
 
-            <TouchableOpacity
-                style={styles.MenuBTN}
-                title="Traduc"
-                onPress={() => handleView(2)}
-            >
-                <Icon name='info' style={view === 2 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>Info</Text>
-
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.MenuBTN}
-                title="Portada"
-                onPress={() => handleView(3)}
-            >
-                <Icon name='home' style={view === 3 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>Home</Text>
-
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.MenuBTN}
-                title="Personajes"
-                onPress={() => handleView(4)}
-            >
-                <MaterialIcons name='people-outline' style={view === 4 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>People</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.MenuBTN}
-                title="Exp"
-                onPress={() => handleView(5)}
-            >
-                <Fontisto name='film' style={view === 5 ? styles.IconSelected:styles.Icon} />
-                <Text style={styles.IconText}>Film</Text>
-            </TouchableOpacity>
+                        </TouchableOpacity>
+                    )
+                })
+            }
         </View>
     )
 }
